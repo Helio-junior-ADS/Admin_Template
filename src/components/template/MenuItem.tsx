@@ -1,27 +1,43 @@
 import Link from 'next/link'
 
 interface ManuItemProps {
-  url : string,
   texto: string,
   icone: any
+  url?: string,
+  className?: string,
+  onClick?: (event:any)=> void,
 }
 
-export default function ManuItem (props: ManuItemProps) {
-  return (
-    <li className={`hover:bg-gray-100`}>
-      <Link href={props.url}>
-        <div className={`
-          flex flex-col justify-center items-center
-          h-20 w-20
+export default function ManuItem(props: ManuItemProps) {
+  function renderizarLink() {
+    return (
+      <div className={`
+        flex flex-col justify-center items-center
+        h-20 w-20 text-gray-600
+        ${props.className}
+      `}>
+        {props.icone}
+        <span className={`
+          text-xs font-light 
         `}>
-          {props.icone}
-          <span className={`
-            text-xs font-light text-gray-600
-          `}>
-            {props.texto}
-          </span>
-        </div>
+          {props.texto}
+        </span>
+      </div>
+    )
+  }
+  return (
+    <li onClick={props.onClick} className={`
+      hover:bg-gray-100
+      cursor-pointer
+    `}>
+      {props.url ? (
+      <Link href={props.url}>
+          {renderizarLink()}
       </Link>
+        
+      ) : (
+          renderizarLink()
+      )}
     </li>
   )
 }
