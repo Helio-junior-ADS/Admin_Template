@@ -17,12 +17,16 @@ export default function () {
 
   return (
     <div className={`
-      flex flex-col h-screen items-center justify-center 
+      flex h-screen items-center justify-center 
     `}>
-      <div className="w-1/2">
-        <h1 className={`
-          text-xl font-bold mb-5
-        `}>
+      <div className="hidden md:block md:w-1/2 lg:w-2/3">
+        <img 
+        src="https://images.hdqwalls.com/download/cyberpunk-2077-mad-peoples-4k-3r-1280x2120.jpg"
+        className="h-screen w-full object-cover"
+        />
+      </div>
+      <div className="m-10 w-full md:w-1/2 lg:w-1/3">
+        <h1 className={`text-2xl font-bold mb-5`}>
           {modo === 'login' ? 'Entre com a Sua Conta' : 'Cadastre-se na Plataforma'}
         </h1>
         <AuthInput
@@ -54,7 +58,23 @@ export default function () {
         `}>
           Entrar com Google 
         </button>        
-          
+          {modo === 'login' ? (
+            <p className="mt-8">
+              Novo por aqui ?
+              <a onClick={()=> setModo('cadastro')} className={`
+                text-blue-500 hover:text-blue-700 font-semibold
+                cursor-pointer
+              `}> Crie uma Conta Gratuitamente ?</a>
+            </p>
+          ) : (
+            <p className="mt-8">
+            Já faz parte da nossa comunidade ?
+            <a onClick={()=> setModo('login')} className={`
+              text-blue-500 hover:text-blue-700 font-semibold
+              cursor-pointer
+            `}> Entre com a suas Credenciais</a>
+          </p>
+          )}
       </div>
       
     </div>
